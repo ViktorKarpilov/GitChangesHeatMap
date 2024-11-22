@@ -1,0 +1,17 @@
+{
+  "name": "web_interface",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch": "esbuild src/app.ts --bundle --watch --outfile=dist/app.js",
+    "build": "esbuild src/app.ts --bundle --minify --outfile=dist/app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "esbuild": "^0.24.0",
+    "typescript": "^5.6.3"
+  }
+}

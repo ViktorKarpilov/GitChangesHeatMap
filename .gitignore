@@ -1,0 +1,8 @@
+/web_interface/node_modules/
+/heatmap-data.csv
+/.idea/misc.xml
+/web_interface/.idea/modules.xml
+/web_interface/package-lock.json
+/temp.js
+/web_interface/.idea/vcs.xml
+/web_interface/.idea/web_interface.iml
