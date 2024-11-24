@@ -18,7 +18,8 @@ class Solution:
 
             # Could be big but i`m to stupid to create algorythm to add node by node them
             buffer = [(row["Count"], list(Path(row['File']).parts)) for row in reader]
-            root_children = self._prepare_nodes(None, buffer)
+            self.system_empty_determinator = buffer[0][1][0]
+            root_children = self._prepare_nodes(self.system_empty_determinator, buffer)
             for child in root_children:
                 root.append_child(child)
 
@@ -30,9 +31,34 @@ class Solution:
         results = []
 
         for i, entry in enumerate(data):
-            if (target is None and len(entry[1]) == 1) or (target is not None and entry[0] == target):
+            # File
+            if len(entry[1]) == 1:
                 results.append(DisplayFileNode(int(entry[0]), entry[1][-1]))
+                entry[1].remove(entry[1][0])
                 indices_to_remove.append(i)
+
+            # Folder
+            elif entry[1][0] == target and target != self.system_empty_determinator:
+                # Take file or folder if it's new
+                if not any(entry[1][1] == result.file_name for result in results):
+                    # If there are only filename and folder - it's final file and it has heat
+                    results.append(DisplayFileNode(int(entry[0]) if len(entry[1]) == 2 else 0, entry[1][1]))
+                entry[1].remove(entry[1][0])
+
+            # First pass
+            elif entry[1][0] == self.system_empty_determinator:
+
+                # Take file or folder if it's new
+                if not any(entry[1][1] == result.file_name for result in results):
+                    # For files - remove and add hit count, for folders count = 0 and do not remove
+                    is_file = len(entry[1]) == 2
+                    results.append(DisplayFileNode(int(entry[0]) if is_file else 0, entry[1][1]))
+                    entry[1].remove(entry[1][1]) if is_file else None
+
+                # Remove determinator
+                entry[1].remove(entry[1][0])
+                if len(entry[1]) == 0:
+                    indices_to_remove.append(i)
 
         # Remove from end to not mess up indices
         for i in reversed(indices_to_remove):

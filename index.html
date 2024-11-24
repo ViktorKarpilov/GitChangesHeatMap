@@ -6,21 +6,225 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Changes Heat Map</title>
 
+        <!-- placeholder for test - remove after push -->
+        <script src="temp.js"></script>
+        <script src="test_data.js"></script>
+        <link rel="stylesheet" href="style.css">
+        <style>
+
+            :root {
+    --transition-duration: 0.3s;
+    --border-radius: 6px;
+    --spacing-unit: 8px;
+    --primary-color: #2196f3;
+    --hover-color: rgba(33, 150, 243, 0.1);
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
+    padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+}
+
+.file-explorer {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.toolbar {
+    display: flex;
+    gap: var(--spacing-unit);
+    margin-bottom: 20px;
+    padding: var(--spacing-unit);
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+}
+
+.search-box {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}
+
+button {
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sort-button:hover {
+    background: var(--hover-color);
+}
+
+.node {
+    margin: 2px 0;
+    border-radius: var(--border-radius);
+}
+
+.node-content {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-unit);
+    padding: 8px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-duration);
+}
+
+.node-content:hover {
+    background: var(--hover-color);
+}
+
+.node.selected > .node-content {
+    background: var(--hover-color);
+    border: 1px solid var(--primary-color);
+}
+
+.children {
+    margin-left: 24px;
+    border-left: 2px solid #eee;
+    padding-left: var(--spacing-unit);
+    overflow: hidden;
+    transition: max-height var(--transition-duration) ease-in-out;
+}
+
+.collapsed > .children {
+    max-height: 0;
+}
+
+.expanded > .children {
+    max-height: 1000px;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-duration);
+}
+
+.collapsed > .node-content > .arrow {
+    transform: rotate(-90deg);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+}
+
+.count {
+    margin-left: auto;
+    font-size: 0.9em;
+    color: #666;
+    background: #f8f9fa;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.details-panel {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.details-panel h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.details-item {
+    margin: 12px 0;
+}
+
+.details-label {
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.details-value {
+    color: #333;
+}
+
+.path-breadcrumb {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    margin-bottom: 12px;
+    overflow-x: auto;
+}
+
+.path-segment {
+    color: #666;
+    cursor: pointer;
+}
+
+.path-segment:hover {
+    color: var(--primary-color);
+}
+
+.path-separator {
+    color: #999;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.node-enter {
+    animation: fadeIn var(--transition-duration) ease-out;
+}
+
+.hidden {
+    display: none !important;
+}
+
+        </style>
+
         <!-- placeholder for production compiled js do not touch -->
         <script>
-            console.log("App script start");
             
-            console.log("Data script start");
             const data = 
 {
     fileName: ".",
-    occurrenceCount: 129,
+    occurrenceCount: 7599,
     expanded: false,
     children: [
         
 {
     fileName: ".gitignore",
-    occurrenceCount: 53,
+    occurrenceCount: 7,
     expanded: false,
     children: [
         
@@ -28,7 +232,556 @@
 }
 , 
 {
-    fileName: "azure-pipelines.yml",
+    fileName: ".travis.yml",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "test-suite",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITest",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "344",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "270",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "255",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "346",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "226",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "207",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "347",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "233",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "256",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "345",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "275",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "225",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "344",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "270",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "255",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "346",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "226",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "207",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "346",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "226",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "207",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "344",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "273",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "266",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "345",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "220",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "215.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "215.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTest",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "344",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "270",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "255",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "346",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "226",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "207",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "347",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "233",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "256",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "345",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "275",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "225",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "344",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "270",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "255",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "346",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "226",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "207",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "346",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "226",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "207",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "344",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "273",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "266",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "345",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "220",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "215.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "215.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "appveyor.yml",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "AUTHORS",
     occurrenceCount: 2,
     expanded: false,
     children: [
@@ -37,8 +790,8 @@
 }
 , 
 {
-    fileName: "HRIM.sln",
-    occurrenceCount: 51,
+    fileName: "cli.md",
+    occurrenceCount: 4,
     expanded: false,
     children: [
         
@@ -46,8 +799,8288 @@
 }
 , 
 {
-    fileName: "package-lock.json",
+    fileName: "clrdefinitions.cmake",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 29,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "compileoptions.cmake",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "detectplatform.cmake",
     occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Directory.Build.props",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "doc",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "cli.md",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "cli.md",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "docs",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "cli.md",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "cli.md",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop.md",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "guide",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "README.md",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "README.md",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "interop.md",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "fetchdeps.cmake",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "getgitrevisiondescription.cmake",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "getgitrevisiondescription.cmake.in",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "init.sh",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "netcoredbg.sln",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "packaging",
+    occurrenceCount: 166,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "netcoredbg.manifest",
+    occurrenceCount: 85,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "netcoredbg.manifest",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "netcoredbg.spec",
+    occurrenceCount: 79,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SOS-rename.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "netcoredbg.spec",
+    occurrenceCount: 79,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SOS-rename.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "patches",
+    occurrenceCount: 44,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "coreclr",
+    occurrenceCount: 40,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "0001-Add-more-stuff-to-devel-package-for-debugger.patch",
+    occurrenceCount: 24,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "0001-Add-more-stuff-to-devel-package-for-debugger.patch",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0001-Add-patch-for-breakpoints-on-ARM.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0002-Add-patch-for-breakpoints-on-ARM.patch",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0002-Enable-Debug-IPC.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0003-Add-patch-for-undefined-references-in-SOS.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0003-Enable-Debug-IPC.patch",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0004-Add-patch-for-undefined-references-in-SOS.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0004-Fix-SetDebuggerREGDISPLAYFromREGDISPLAY-function-on-.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "0001-Add-patch-for-breakpoints-on-ARM.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0002-Add-patch-for-breakpoints-on-ARM.patch",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0002-Enable-Debug-IPC.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0003-Add-patch-for-undefined-references-in-SOS.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0003-Enable-Debug-IPC.patch",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0004-Add-patch-for-undefined-references-in-SOS.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "0004-Fix-SetDebuggerREGDISPLAYFromREGDISPLAY-function-on-.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "dotnet-launcher",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "0001-Enable-waiting-for-managed-debugger-attach.patch",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "0001-Enable-waiting-for-managed-debugger-attach.patch",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "platformdefinitions.cmake",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "README.md",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "src",
+    occurrenceCount: 5473,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "buildinfo.cpp.in",
+    occurrenceCount: 147,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "buildinfo.cpp.in",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "buildinfo.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 37,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "dynlibs.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "filesystem.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "filesystem.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ioredirect.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ioredirect.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "main.cpp",
+    occurrenceCount: 26,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "span.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "streams.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "string_view.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "torelease.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "utility.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "version.h",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "buildinfo.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 37,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "debug",
+    occurrenceCount: 3797,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "debugger",
+    occurrenceCount: 1625,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "breakpoints.cpp",
+    occurrenceCount: 851,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "breakpoints.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "commands.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "frames.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "main.cpp",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.cpp",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "symbolreader.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "symbolreader.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "torelease.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.cpp",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valueprint.cpp",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewalk.cpp",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "varobj.cpp",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_break.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_break.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_entry.cpp",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_entry.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_hotreload.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_hotreload.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_interop_rendezvous.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_interop_rendezvous.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_exception.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_exception.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_func.cpp",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_func.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_interop_line.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_interop.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_interop.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_line.cpp",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_line.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints.cpp",
+    occurrenceCount: 32,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints.h",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpointutils.cpp",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpointutils.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "callbacksqueue.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "callbacksqueue.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "dbgshim.h",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "debugger.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalhelpers.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalhelpers.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalstackmachine.cpp",
+    occurrenceCount: 26,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalstackmachine.h",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evaluationpart.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evaluator.cpp",
+    occurrenceCount: 37,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evaluator.h",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalutils.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalutils.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalwaiter.cpp",
+    occurrenceCount: 13,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalwaiter.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "exceptionbreakpointstorage.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "exceptionbreakpointstorage.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "expr.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "frames.cpp",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "frames.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "hotreloadhelpers.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "hotreloadhelpers.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_arm32_singlestep_helpers.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_arm32_singlestep_helpers.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_brk_helpers.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_brk_helpers.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_debugging.cpp",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_debugging.h",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_mem_helpers.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_mem_helpers.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_ptrace_helpers.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_ptrace_helpers.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_riscv64_singlestep_helpers.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_unwind.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_unwind.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "managedcallback.cpp",
+    occurrenceCount: 43,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "managedcallback.h",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "manageddebugger.cpp",
+    occurrenceCount: 69,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "manageddebugger.h",
+    occurrenceCount: 53,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sigaction.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "stepper_async.cpp",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "stepper_async.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "stepper_simple.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "stepper_simple.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "steppers.cpp",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "steppers.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "threads.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "threads.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valueprint.cpp",
+    occurrenceCount: 17,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valueprint.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewalk.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewrite.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewrite.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "variables.cpp",
+    occurrenceCount: 28,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "variables.h",
+    occurrenceCount: 13,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "waitpid.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "waitpid.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "commands.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "frames.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "main.cpp",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.cpp",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "symbolreader.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "symbolreader.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "torelease.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.cpp",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valueprint.cpp",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewalk.cpp",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "varobj.cpp",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_break.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_break.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_entry.cpp",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_entry.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_hotreload.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_hotreload.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_interop_rendezvous.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoint_interop_rendezvous.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_exception.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_exception.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_func.cpp",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_func.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_interop_line.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_interop.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_interop.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_line.cpp",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints_line.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints.h",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpointutils.cpp",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpointutils.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "callbacksqueue.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "callbacksqueue.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "dbgshim.h",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "debugger.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalhelpers.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalhelpers.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalstackmachine.cpp",
+    occurrenceCount: 26,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalstackmachine.h",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evaluationpart.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evaluator.cpp",
+    occurrenceCount: 37,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evaluator.h",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalutils.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalutils.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalwaiter.cpp",
+    occurrenceCount: 13,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "evalwaiter.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "exceptionbreakpointstorage.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "exceptionbreakpointstorage.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "expr.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "frames.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "hotreloadhelpers.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "hotreloadhelpers.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_arm32_singlestep_helpers.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_arm32_singlestep_helpers.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_brk_helpers.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_brk_helpers.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_debugging.cpp",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_debugging.h",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_mem_helpers.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_mem_helpers.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_ptrace_helpers.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_ptrace_helpers.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_riscv64_singlestep_helpers.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_unwind.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_unwind.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "managedcallback.cpp",
+    occurrenceCount: 43,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "managedcallback.h",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "manageddebugger.cpp",
+    occurrenceCount: 69,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "manageddebugger.h",
+    occurrenceCount: 53,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sigaction.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "stepper_async.cpp",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "stepper_async.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "stepper_simple.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "stepper_simple.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "steppers.cpp",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "steppers.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "threads.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "threads.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valueprint.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewrite.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewrite.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "variables.cpp",
+    occurrenceCount: 28,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "variables.h",
+    occurrenceCount: 13,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "waitpid.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "waitpid.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "netcoredbg",
+    occurrenceCount: 2172,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "breakpoints.cpp",
+    occurrenceCount: 1135,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "breakpoints.cpp",
+    occurrenceCount: 49,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "breakpoints.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "cliprotocol.cpp",
+    occurrenceCount: 17,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "cliprotocol.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 46,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "commands.cpp",
+    occurrenceCount: 56,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "common.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "cputil.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "cputil.h",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "debugger.h",
+    occurrenceCount: 60,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "expr.cpp",
+    occurrenceCount: 26,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "expr.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "frames.cpp",
+    occurrenceCount: 38,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "frames.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iprotocol.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iprotocol.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "jmc.cpp",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "logger.cpp",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "logger.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "main.cpp",
+    occurrenceCount: 85,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "manageddebugger.cpp",
+    occurrenceCount: 71,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "manageddebugger.h",
+    occurrenceCount: 35,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "miprotocol.cpp",
+    occurrenceCount: 54,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "miprotocol.h",
+    occurrenceCount: 20,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.cpp",
+    occurrenceCount: 41,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.h",
+    occurrenceCount: 22,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform.cpp",
+    occurrenceCount: 24,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform.h",
+    occurrenceCount: 17,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol.h",
+    occurrenceCount: 41,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "symbolreader.cpp",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SymbolReader.cs",
+    occurrenceCount: 17,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SymbolReader.csproj",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "symbolreader.h",
+    occurrenceCount: 20,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "torelease.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.cpp",
+    occurrenceCount: 18,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.h",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valueprint.cpp",
+    occurrenceCount: 20,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valueprint.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewalk.cpp",
+    occurrenceCount: 48,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewalk.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewrite.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewrite.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "variables.cpp",
+    occurrenceCount: 28,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "varobj.cpp",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "varobj.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "version.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "vscodeprotocol.cpp",
+    occurrenceCount: 46,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "vscodeprotocol.h",
+    occurrenceCount: 15,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "breakpoints.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "cliprotocol.cpp",
+    occurrenceCount: 17,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "cliprotocol.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 46,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "commands.cpp",
+    occurrenceCount: 56,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "common.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "cputil.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "cputil.h",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "debugger.h",
+    occurrenceCount: 60,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "expr.cpp",
+    occurrenceCount: 26,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "expr.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "frames.cpp",
+    occurrenceCount: 38,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "frames.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iprotocol.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iprotocol.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "jmc.cpp",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "logger.cpp",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "logger.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "main.cpp",
+    occurrenceCount: 85,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "manageddebugger.cpp",
+    occurrenceCount: 71,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "manageddebugger.h",
+    occurrenceCount: 35,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "miprotocol.cpp",
+    occurrenceCount: 54,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "miprotocol.h",
+    occurrenceCount: 20,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.cpp",
+    occurrenceCount: 41,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.h",
+    occurrenceCount: 22,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform.cpp",
+    occurrenceCount: 24,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform.h",
+    occurrenceCount: 17,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol.h",
+    occurrenceCount: 41,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "symbolreader.cpp",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SymbolReader.cs",
+    occurrenceCount: 17,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SymbolReader.csproj",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "symbolreader.h",
+    occurrenceCount: 20,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "torelease.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.cpp",
+    occurrenceCount: 18,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.h",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valueprint.cpp",
+    occurrenceCount: 20,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valueprint.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewalk.cpp",
+    occurrenceCount: 48,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewalk.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewrite.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "valuewrite.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "variables.cpp",
+    occurrenceCount: 28,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "varobj.cpp",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "varobj.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "version.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "vscodeprotocol.cpp",
+    occurrenceCount: 46,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "vscodeprotocol.h",
+    occurrenceCount: 15,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "debugger",
+    occurrenceCount: 0,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "dynlibs.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "filesystem.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "filesystem.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interfaces",
+    occurrenceCount: 66,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "idebugger.h",
+    occurrenceCount: 53,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "idebugger.h",
+    occurrenceCount: 20,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iprotocol.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "types.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "iprotocol.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "types.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ioredirect.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ioredirect.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "main.cpp",
+    occurrenceCount: 26,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "managed",
+    occurrenceCount: 220,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Evaluation.cs",
+    occurrenceCount: 119,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Evaluation.cs",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop.cpp",
+    occurrenceCount: 34,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop.h",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ManagedPart.csproj",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "StackMachine.cs",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SymbolReader.cs",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Utils.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "interop.cpp",
+    occurrenceCount: 34,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop.h",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ManagedPart.csproj",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "StackMachine.cs",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SymbolReader.cs",
+    occurrenceCount: 23,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Utils.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "metadata",
+    occurrenceCount: 274,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "async_info.cpp",
+    occurrenceCount: 140,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "async_info.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "async_info.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_libraries.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_libraries.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "jmc.cpp",
+    occurrenceCount: 13,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules_app_update.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules_sources.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules_sources.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.cpp",
+    occurrenceCount: 47,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.h",
+    occurrenceCount: 33,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sos_md.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.cpp",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "async_info.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_libraries.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_libraries.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "jmc.cpp",
+    occurrenceCount: 13,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules_app_update.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules_sources.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules_sources.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.cpp",
+    occurrenceCount: 47,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "modules.h",
+    occurrenceCount: 33,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sos_md.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.cpp",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "typeprinter.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ncdbhook",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ncdbhook.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ncdbhook.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "platform.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocols",
+    occurrenceCount: 512,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "cliprotocol.cpp",
+    occurrenceCount: 323,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "cliprotocol.cpp",
+    occurrenceCount: 67,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "cliprotocol.h",
+    occurrenceCount: 34,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "completions.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "escaped_string.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iprotocol.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iprotocol.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "miprotocol.cpp",
+    occurrenceCount: 35,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "miprotocol.h",
+    occurrenceCount: 18,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol_utils.cpp",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol_utils.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol.h",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sourcestorage.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sourcestorage.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "tokenizer.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "tokenizer.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "vscodeprotocol.cpp",
+    occurrenceCount: 36,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "vscodeprotocol.h",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "cliprotocol.h",
+    occurrenceCount: 34,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "completions.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "escaped_string.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iprotocol.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iprotocol.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "miprotocol.cpp",
+    occurrenceCount: 35,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "miprotocol.h",
+    occurrenceCount: 18,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol_utils.cpp",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol_utils.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "protocol.h",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sourcestorage.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sourcestorage.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "tokenizer.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "tokenizer.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "vscodeprotocol.cpp",
+    occurrenceCount: 36,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "vscodeprotocol.h",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "span.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "streams.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "string_view.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ToolBox",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "SOS",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "NETCore",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "SymbolReader.cs",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "SymbolReader.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "torelease.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "unittests",
+    occurrenceCount: 50,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 33,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "compile_test.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "escaped_string_test.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ioredirect_test.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_test.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "span_test.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "streams_test.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "string_view_test.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "compile_test.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "escaped_string_test.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ioredirect_test.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_test.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "span_test.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "streams_test.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "string_view_test.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "unix",
+    occurrenceCount: 64,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "dynlibs_unix.cpp",
+    occurrenceCount: 37,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "dynlibs_unix.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "filesystem_unix.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "filesystem_unix.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_unix.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_unix.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_unix.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform_unix.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "filesystem_unix.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "filesystem_unix.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_unix.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_unix.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_unix.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform_unix.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "utility.h",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "utils",
+    occurrenceCount: 134,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "dynlibs_unix.cpp",
+    occurrenceCount: 69,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "dynlibs_unix.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "escaped_string.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "escaped_string.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "indexed_storage.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_unix.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_win32.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ioredirect.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ioredirect.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_win32.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "literal_string.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "logger.cpp",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "logger.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "rwlock.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "span.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "streams.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "streams.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "torelease.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "utf.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "utf.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "escaped_string.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "escaped_string.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "indexed_storage.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_unix.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_win32.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ioredirect.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ioredirect.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_win32.cpp",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "literal_string.h",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "logger.cpp",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "logger.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "rwlock.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "span.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "streams.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "streams.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "torelease.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "utf.cpp",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "utf.h",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "version.h",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "windows",
+    occurrenceCount: 52,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "dynlibs_win32.cpp",
+    occurrenceCount: 30,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "dynlibs_win32.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "filesystem_win32.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_win32.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_win32.cpp",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_win32.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform_win32.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "filesystem_win32.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "interop_win32.cpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_win32.cpp",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "iosystem_win32.h",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "platform_win32.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "test-suite",
+    occurrenceCount: 1474,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "CLITestBreakpoint",
+    occurrenceCount: 183,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "log_test.txt",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "log_test.txt",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "README.md",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "run_cli_test.sh",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "run_tests.ps1",
+    occurrenceCount: 28,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "run_tests.sh",
+    occurrenceCount: 36,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sdb_run_tests.ps1",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sdb_run_tests.sh",
+    occurrenceCount: 42,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sdb_run_tizen_tests.sh",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "test-suite.sln",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "LocalDebugger",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "LocalDebugger.csproj",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "LocalDebugger.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "LocalDebuggerProcess.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "LocalDebuggerProcess.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MIExampleTest",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MIExampleTest.csproj",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MIExampleTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program_second_source.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program_second_source.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestAsyncStepping",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestBreak",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestBreakpoint",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestBreakpoint.csproj",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestBreakpoint.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestBreakpointToModule",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestBreakpointToModule.csproj",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestBreakpointToModule.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestEnum",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestEnv",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestEnv.csproj",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestEnv.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestEvalArraysIndexers",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestEvalNotEnglish",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestEvaluate",
+    occurrenceCount: 38,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 38,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 19,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestException",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestException.csproj",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestException.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestExceptionBreakpoint",
+    occurrenceCount: 22,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExceptionBreakpoint.csproj",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExceptionBreakpoint.csproj",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestExecAbort",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExecAbort.csproj",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExecAbort.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestExecFinish",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExecFinish.csproj",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExecFinish.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestExecInt",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExecInt.csproj",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExecInt.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestExitCode",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestExpression",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExpression.csproj",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestExpression.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestGDB",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestGDB.csproj",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestGDB.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestGeneric",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHandshake",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestHandshake.csproj",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestHandshake.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHotReloadAsyncStepping",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHotReloadBreak",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHotReloadBreakpoint",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHotReloadEvaluate",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHotReloadJMC",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHotReloadPDB",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHotReloadStepping",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHotReloadUpdate",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestHotReloadWithoutBreak",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestLambda",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestLambda.csproj",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestLambda.csproj",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestModule1",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestModule1.csproj",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestModule1.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestModule2",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestModule2.csproj",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestModule2.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestNoJMCAsyncStepping",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestNoJMCNoFilterStepping",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestSetValue",
+    occurrenceCount: 26,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestSetValue.csproj",
+    occurrenceCount: 15,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestSetValue.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestSrcBreakpointResolve",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestStepping",
+    occurrenceCount: 26,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestStepping.csproj",
+    occurrenceCount: 15,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestStepping.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestTarget",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestTarget.csproj",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestTarget.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestVariables",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MITestVarObject",
+    occurrenceCount: 18,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestVarObject.csproj",
+    occurrenceCount: 11,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MITestVarObject.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "NetcoreDbgTest",
+    occurrenceCount: 146,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Checkpoint.cs",
+    occurrenceCount: 31,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Checkpoint.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ControlInfo.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ControlPart.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ControlScript.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Debuggee.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "DebuggeeInfo.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "DebuggeeScript.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Exception.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Label.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Logger.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "NetcoreDbgTest.csproj",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ControlInfo.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ControlPart.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ControlScript.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Debuggee.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "DebuggeeInfo.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "DebuggeeScript.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Delta",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "GenerateDelta.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "GenerateDelta.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "WatchHotReloadService.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "WatchHotReloadService.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Exception.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Label.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Logger.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "MI",
+    occurrenceCount: 32,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MIDebugger.cs",
+    occurrenceCount: 21,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MIDebugger.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "MILocalDebuggerClient.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "MIObject.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "MIParser.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "MITcpDebuggerClient.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MILocalDebuggerClient.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "MIObject.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "MIParser.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "MITcpDebuggerClient.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "NetcoreDbgTest.csproj",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCode",
+    occurrenceCount: 48,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "VSCodeDebugger.cs",
+    occurrenceCount: 28,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "VSCodeDebugger.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeLocaleDebuggerClient.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeProtocolEvent.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeProtocolRequest.cs",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeProtocolResponse.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTcpDebuggerClient.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeLocaleDebuggerClient.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeProtocolEvent.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeProtocolRequest.cs",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeProtocolResponse.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTcpDebuggerClient.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "README.md",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "run_cli_test.sh",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "run_tests.ps1",
+    occurrenceCount: 28,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "run_tests.sh",
+    occurrenceCount: 36,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sdb_run_tests.ps1",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sdb_run_tests.sh",
+    occurrenceCount: 42,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "sdb_run_tizen_tests.sh",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "test-suite.sln",
+    occurrenceCount: 27,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "TestApp1",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "TestApp1.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "TestApp1.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "TestApp2",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "TestApp2.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "TestApp2.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "TestAppHotReload",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "TestAppHotReloadAsync",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "TestAppHotReloadUpdate",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "TestRunner",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "TestRunner.cs",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "TestRunner.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "TestRunner.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "TestRunner.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeExampleTest",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeExampleTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeExampleTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTest297killNCD",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "t297killNCD.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "t297killNCD.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestAsyncStepping",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestAttach",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestAttach.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestAttach.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestBreak",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestBreakpoint",
+    occurrenceCount: 20,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 18,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestBreakpoint.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestBreakpoint.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestDisconnect",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestDisconnect.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestDisconnect.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestEnum",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestEnv",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestEnv.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestEnv.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestEvalArraysIndexers",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestEvalNotEnglish",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestEvaluate",
+    occurrenceCount: 54,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 52,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 25,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestEvaluate.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestEvaluate.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestExceptionBreakpoint",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestExitCode",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestFuncBreak",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestFuncBreak.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestFuncBreak.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestGeneric",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestNoJMCAsyncStepping",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestNoJMCBreakpoint",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestNoJMCExceptionBreakpoint",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestNoJMCNoFilterStepping",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestPause",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestPause.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestPause.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestSrcBreakpointResolve",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestStepping",
+    occurrenceCount: 30,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 28,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 13,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestStepping.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestStepping.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestThreads",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestThreads.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestThreads.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestVariables",
+    occurrenceCount: 36,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 34,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "Program.cs",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestVariables.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "VSCodeTestVariables.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "XunitTests",
+    occurrenceCount: 94,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "LocalTest.cs",
+    occurrenceCount: 72,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "LocalTest.cs",
+    occurrenceCount: 25,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "XunitTests.csproj",
+    occurrenceCount: 22,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "XunitTests.csproj",
+    occurrenceCount: 22,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "tests",
+    occurrenceCount: 210,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "BreakpointAddRemoveTest",
+    occurrenceCount: 38,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "BreakpointAddRemoveTest.cs",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "BreakpointAddRemoveTest.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "BreakpointAddRemoveTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "BreakpointAddRemoveTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "README.md",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "run_tests_sdb.sh",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "tests.sln",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "cli",
+    occurrenceCount: 20,
+    expanded: false,
+    children: [
+        
+{
+    fileName: ".gitignore",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: ".gitignore",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Makefile",
+    occurrenceCount: 2,
     expanded: false,
     children: [
         
@@ -64,7 +9097,7 @@
 }
 , 
 {
-    fileName: "UpgradeLog4.htm",
+    fileName: "test.cs",
     occurrenceCount: 2,
     expanded: false,
     children: [
@@ -73,7 +9106,19 @@
 }
 , 
 {
-    fileName: "UpgradeLog5.htm",
+    fileName: "test.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Makefile",
     occurrenceCount: 2,
     expanded: false,
     children: [
@@ -82,7 +9127,7 @@
 }
 , 
 {
-    fileName: "UpgradeLog6.htm",
+    fileName: "README.md",
     occurrenceCount: 2,
     expanded: false,
     children: [
@@ -91,8 +9136,842 @@
 }
 , 
 {
-    fileName: "whitesource-fs-agent.config",
+    fileName: "test.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "test.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ExceptionBreakpointMultiThreadsTest",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ExceptionBreakpointMultiThreadsTest.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ExceptionBreakpointMultiThreadsTest.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ExceptionBreakpointMultiThreadsTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ExceptionBreakpointMultiThreadsTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ExceptionBreakpointTest",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ExceptionBreakpointTest.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ExceptionBreakpointTest.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ExceptionBreakpointTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ExceptionBreakpointTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ExceptionTest",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ExceptionTest.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ExceptionTest.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ExceptionTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ExceptionTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ExpressionsTest",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ExpressionsTest.csproj",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ExpressionsTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "LambdaTest",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "LambdaTest.csproj",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "LambdaTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "Program.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "README.md",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "run_tests_sdb.sh",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "runner",
+    occurrenceCount: 54,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MIException.cs",
+    occurrenceCount: 29,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "MIException.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "MIResults.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Runner.cs",
+    occurrenceCount: 18,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "runner.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "MIResults.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "Runner.cs",
+    occurrenceCount: 18,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "runner.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "SetValuesTest",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "SetValuesTest.cs",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "SetValuesTest.cs",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SetValuesTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "SetValuesTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "SimpleSteppingTest",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "SimpleSteppingTest.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "SimpleSteppingTest.cs",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "SimpleSteppingTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "SimpleSteppingTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "tests.sln",
+    occurrenceCount: 9,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ValuesTest",
+    occurrenceCount: 14,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ValuesTest.cs",
     occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "ValuesTest.cs",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "ValuesTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "ValuesTest.csproj",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "third_party",
+    occurrenceCount: 68,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "catch2",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "catch.hpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "catch.hpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "json",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "json.hpp",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "json.hpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "libelfin",
+    occurrenceCount: 26,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "dwarf",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "dwarf++.h",
+    occurrenceCount: 7,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "dwarf++.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "line.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "line.cpp",
+    occurrenceCount: 3,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "README.md",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "elf",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "elf.cpp",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "elf.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "elf++.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "mmap_loader.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "elf++.h",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+, 
+{
+    fileName: "mmap_loader.cpp",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "README.md",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "linenoise-ng",
+    occurrenceCount: 34,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "CMakeLists.txt",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "include",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "linenoise.h",
+    occurrenceCount: 10,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "linenoise.h",
+    occurrenceCount: 5,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "src",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "linenoise.cpp",
+    occurrenceCount: 16,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "linenoise.cpp",
+    occurrenceCount: 8,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "tst",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "example.c",
+    occurrenceCount: 4,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "example.c",
+    occurrenceCount: 2,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "tools",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "generrmsg",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "GenErrMsg.cs",
+    occurrenceCount: 12,
+    expanded: false,
+    children: [
+        
+{
+    fileName: "GenErrMsg.cs",
+    occurrenceCount: 6,
+    expanded: false,
+    children: [
+        
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+
+    ]
+}
+, 
+{
+    fileName: "vcsinfo.cmake",
+    occurrenceCount: 3,
     expanded: false,
     children: [
         
@@ -103,77 +9982,360 @@
 }
 ;
             localStorage.setItem("HEATMAP_DATA",JSON.stringify(data));
-            console.log("Data saved to localStorage");
         
 
             (() => {
-  // web_interface/src/app.ts
-  var TreeExplorer = class {
-    maxCount;
-    root;
-    constructor(containerId, data) {
-      this.root = document.getElementById(containerId);
-      if (!this.root) throw new Error(`Container ${containerId} not found`);
-      this.maxCount = this.findMaxCount(data);
-      this.render(data);
+  // web_interface/src/consts.ts
+  var CONTAINER_ID = "app_container";
+  var BREAD_CRUMB_TARGET = "breadCrumb-target";
+
+  // web_interface/src/models/file_explorer.ts
+  var FileExplorer = class {
+    data;
+    state;
+    nodeClassName;
+    constructor(data) {
+      this.data = data;
+      this.state = {
+        searchTerm: "",
+        sortBy: "name",
+        selectedNode: null,
+        sortDirection: "desc"
+      };
+      this.nodeClassName = "node";
     }
-    findMaxCount(node) {
-      let max = node.occurrenceCount || 0;
-      if (node.children) {
-        node.children.forEach((child) => {
-          max = Math.max(max, this.findMaxCount(child));
+    afterInitiated(container) {
+      let root = document.querySelector(`.${this.nodeClassName}`);
+      this.coupleRenderedAndDataNodes(root, this.data);
+      this.traverseNodes(this.data, (node) => {
+        node.renderedNode.addEventListener("click", (e) => {
+          e.stopPropagation();
+          if (node.children.length) {
+            node.expanded = !node.expanded;
+            node.renderedNode.classList.toggle("collapsed");
+          }
         });
+      });
+      container.querySelector(".file-explorer > button").addEventListener("click", (e) => {
+        this.toggleAll();
+      });
+    }
+    render() {
+      return `
+            <div class="file-explorer">
+                <button data-action="expand">Toggle All</button>
+                ${this.renderTree(this.data)}
+            </div>
+        `;
+    }
+    coupleRenderedAndDataNodes(rendered_node, data_node) {
+      data_node.renderedNode = rendered_node;
+      let data_children = data_node.children;
+      let rendered_parent_childrens = rendered_node.children;
+      let rendered_childrens;
+      for (let i = 0; i < rendered_parent_childrens.length; i++) {
+        if (rendered_parent_childrens[i].className == "children") {
+          rendered_childrens = rendered_parent_childrens[i].children;
+          break;
+        }
+      }
+      if (rendered_childrens) {
+        for (let i = 0; i < rendered_childrens.length; i++) {
+          let id = parseInt(rendered_childrens[i].id);
+          let children = data_children.filter((data) => data.id == id)[0];
+          this.coupleRenderedAndDataNodes(rendered_childrens[i], children);
+        }
+        return;
+      }
+    }
+    renderTree(node) {
+      const isSelected = this.state.selectedNode === node;
+      return `
+            <div id="${node.id}" class="${this.nodeClassName} ${node.expanded ? "expanded" : "collapsed"} ${isSelected ? "selected" : ""} ${BREAD_CRUMB_TARGET}"
+                 data-path="${node.path}">
+                <div class="node-content" style="background-color: ${node.color}">
+                    ${node.children.length ? '<span class="arrow">\u25BC</span>' : '<span class="arrow"></span>'}
+                    <span class="icon">${node.children.length ? "\u{1F4C1}" : "\u{1F4C4}"}</span>
+                    <span class="name">${node.fileName}</span>
+                    <span class="count">${node.occurrenceCount}</span>
+                </div>
+                ${node.children.length ? `
+                    <div class="children">
+                        ${node.children.map((child) => this.renderTree(child)).join("")}
+                    </div>
+                ` : ""}
+            </div>
+        `;
+    }
+    // If root open - close all, if closed - open all
+    toggleAll() {
+      this.traverseNodes(this.data, (node) => {
+        node.expanded = !this.data.expanded;
+        if (node.expanded) {
+          node.renderedNode.classList.remove("collapsed");
+        } else {
+          node.renderedNode.classList.add("collapsed");
+        }
+      });
+    }
+    filterNodes(searchTerm, targetNode = null) {
+      const termLower = searchTerm.toLowerCase();
+      if (!targetNode) {
+        return this.filterNodes(termLower, this.data);
+      }
+      if (!searchTerm || searchTerm.length < 4) {
+        if (searchTerm.length < 2) {
+          this.traverseNodes(this.data, (node) => node.renderedNode.classList.remove("hidden"));
+        }
+      }
+      let isMatch = false;
+      for (let i = 0; i < targetNode.children.length; i++) {
+        isMatch = this.filterNodes(termLower, targetNode.children[i]) || isMatch;
+      }
+      isMatch = isMatch || this.isIncludeString(targetNode.path, termLower);
+      if (!isMatch) {
+        targetNode.renderedNode.classList.add("hidden");
+      }
+      return isMatch;
+    }
+    sortNodes(sortBy, direction) {
+      this.traverseNodes(this.data, (node) => {
+        if (node.children.length === 0) return;
+        const childrenContainer = node.renderedNode.querySelector(".children");
+        if (!childrenContainer) return;
+        node.children.sort((a, b) => {
+          let comparison;
+          if (sortBy === "name") {
+            comparison = a.fileName.localeCompare(b.fileName);
+          } else {
+            comparison = a.occurrenceCount - b.occurrenceCount;
+          }
+          return direction === "asc" ? comparison : -comparison;
+        });
+        const fragment = document.createDocumentFragment();
+        node.children.forEach((child) => {
+          fragment.appendChild(child.renderedNode);
+        });
+        childrenContainer.innerHTML = "";
+        childrenContainer.appendChild(fragment);
+      });
+    }
+    traverseNodes(node, callback) {
+      callback(node);
+      node.children.forEach((child) => this.traverseNodes(child, callback));
+    }
+    isIncludeString(first, second) {
+      return first.indexOf(second) !== -1;
+    }
+  };
+
+  // web_interface/src/models/file_explorer_builder.ts
+  var FileExplorerBuilder = class {
+    data;
+    maxCount;
+    referenceNumber;
+    constructor() {
+      this.referenceNumber = { number: 0 };
+      this.data = this.loadData();
+      this.maxCount = this.calculateMaxCount(this.data);
+      this.calculateDynamic(this.data);
+    }
+    loadData() {
+      const rawData = localStorage.getItem("HEATMAP_DATA");
+      let data = rawData ? JSON.parse(rawData) : {
+        fileName: ".",
+        occurrenceCount: 1,
+        expanded: true,
+        children: []
+      };
+      return data;
+    }
+    // private getBackgroundColor(count: number): string {
+    //     if (this.maxCount === 0) return 'transparent';
+    //     const ratio = count / this.maxCount;
+    //     const red = Math.floor(255 * ratio);
+    //     const green = Math.floor(255 * (1 - ratio));
+    //     return `rgba(${red}, ${green}, 0, 0.1)`;
+    // }
+    getBackgroundColor(count) {
+      if (this.maxCount === 0) return "transparent";
+      const logMax = Math.log(this.maxCount + 1);
+      const logCount = Math.log(count + 1);
+      const ratio = logCount / logMax;
+      const red = Math.floor(255 * ratio);
+      const green = Math.floor(255 * (1 - Math.pow(ratio, 2)));
+      return `rgba(${red}, ${green}, 0, 0.3)`;
+    }
+    calculateDynamic(node, parentPath = "") {
+      const currentPath = parentPath ? `${parentPath}/${node.fileName}` : node.fileName;
+      node.path = currentPath;
+      node.color = this.getBackgroundColor(node.occurrenceCount);
+      node.id = this.referenceNumber.number;
+      this.referenceNumber.number += 1;
+      node.children.forEach((child) => this.calculateDynamic(child, currentPath));
+    }
+    calculateMaxCount(node) {
+      let max = node.occurrenceCount;
+      for (const child of node.children) {
+        max = Math.max(max, this.calculateMaxCount(child));
       }
       return max;
     }
-    getColorForCount(count) {
-      const normalized = count / this.maxCount;
-      const red = Math.floor(normalized * 255);
-      const green = Math.floor((1 - normalized) * 255);
-      return `rgb(${red}, ${green}, 0)`;
-    }
-    createNode(node) {
-      const div = document.createElement("div");
-      div.className = "node";
-      const content = document.createElement("div");
-      content.className = "node-content";
-      const toggle = document.createElement("span");
-      toggle.className = "toggle";
-      const name = document.createElement("span");
-      name.textContent = node.fileName;
-      const count = document.createElement("span");
-      count.className = "count";
-      count.textContent = node.occurrenceCount?.toString() || "0";
-      content.append(toggle, name, count);
-      div.appendChild(content);
-      if (node.children?.length) {
-        toggle.textContent = "+";
-        const children = document.createElement("div");
-        children.className = "children";
-        node.children.forEach((child) => {
-          children.appendChild(this.createNode(child));
-        });
-        div.appendChild(children);
-        toggle.addEventListener("click", (e) => {
-          e.stopPropagation();
-          children.classList.toggle("open");
-          toggle.textContent = children.classList.contains("open") ? "-" : "+";
-        });
-      }
-      if (node.occurrenceCount) {
-        div.style.backgroundColor = this.getColorForCount(node.occurrenceCount);
-      }
-      return div;
-    }
-    render(data) {
-      this.root.appendChild(this.createNode(data));
+    build() {
+      return new FileExplorer(this.data);
     }
   };
-  console.log("Loaded");
+
+  // web_interface/src/models/bread_crumb.ts
+  var BreadCrumb = class {
+    path;
+    container;
+    className;
+    constructor() {
+      this.path = "";
+      this.className = "path-breadCrumb";
+    }
+    afterInitiated(container) {
+      this.container = container;
+      let targets = this.container.getElementsByClassName(BREAD_CRUMB_TARGET);
+      for (let i = 0; i < targets.length; i++) {
+        let target = targets[i];
+        target.addEventListener("mouseenter", (e) => {
+          const path = target.getAttribute("data-path");
+          this.setPath(path);
+        });
+      }
+    }
+    setPath(path) {
+      this.path = path;
+      this.container.getElementsByClassName(this.className)[0].innerHTML = this.getPathRendered();
+    }
+    render() {
+      const renderedPath = this.getPathRendered();
+      return `
+            <div class=${this.className}>
+                ${renderedPath}
+            </div>
+        `;
+    }
+    getPathRendered() {
+      const segments = (this.path || "").split("/");
+      return `
+                ${segments.map((segment, index) => `
+                    <span class="path-segment" data-path="${segments.slice(0, index + 1).join("/")}">${segment}</span>
+                    ${index < segments.length - 1 ? '<span class="path-separator">/</span>' : ""}
+                `).join("")}
+        `;
+    }
+  };
+
+  // web_interface/src/models/toolbar.ts
+  var debounceTimeout;
+  var Toolbar = class {
+    state;
+    fileExplorer;
+    constructor(fileExplorer) {
+      this.fileExplorer = fileExplorer;
+      this.state = {
+        searchTerm: "",
+        sortBy: "name",
+        sortDirection: "desc"
+      };
+    }
+    afterInitiated(self) {
+      const searchBox = self.querySelector(".search-box");
+      searchBox?.addEventListener("input", (e) => {
+        this.state.searchTerm = e.target.value;
+        this.debounce((term) => {
+          this.fileExplorer.filterNodes(term);
+        }, 300)(this.state.searchTerm);
+      });
+      self.querySelectorAll(".sort-button").forEach((button) => {
+        button.addEventListener("click", () => {
+          const sortType = button.getAttribute("data-sort");
+          if (this.state.sortBy === sortType) {
+            this.state.sortDirection = this.state.sortDirection === "asc" ? "desc" : "asc";
+          } else {
+            this.state.sortBy = sortType;
+            this.state.sortDirection = "asc";
+          }
+          self.querySelectorAll(".sort-button").forEach((btn) => {
+            const btnType = btn.getAttribute("data-sort");
+            const iconSpan = btn.querySelector(".sort-icon");
+            if (iconSpan) {
+              iconSpan.textContent = this.getSortIcon(btnType);
+            }
+          });
+          this.fileExplorer.sortNodes(this.state.sortBy, this.state.sortDirection);
+        });
+      });
+    }
+    render() {
+      return `
+            <div class="toolbar">
+                <input type="text" 
+                    class="search-box" 
+                    placeholder="Search files..." 
+                    value="${this.state.searchTerm}">
+                <button class="sort-button" data-sort="name">
+                    Name <span class="sort-icon">${this.getSortIcon("name")}</span>
+                </button>
+                <button class="sort-button" data-sort="count">
+                    Count <span class="sort-icon">${this.getSortIcon("count")}</span>
+                </button>
+            </div>
+        `;
+    }
+    debounce(func, wait) {
+      return function(...args) {
+        if (debounceTimeout) {
+          clearTimeout(debounceTimeout);
+        }
+        debounceTimeout = setTimeout(() => {
+          func.apply(this, args);
+        }, wait);
+      };
+    }
+    getSortIcon(type) {
+      if (this.state.sortBy !== type) return "\u21D5";
+      return this.state.sortDirection === "asc" ? "\u21D1" : "\u21D3";
+    }
+  };
+
+  // web_interface/src/utils/renderer.ts
+  var Renderer = class {
+    orderedElements;
+    container;
+    constructor(breadCrumb, toolbar, fileExplorer) {
+      this.orderedElements = [
+        toolbar,
+        breadCrumb,
+        fileExplorer
+      ];
+      this.container = document.getElementById(CONTAINER_ID);
+      this.renderApp();
+      this.orderedElements.forEach((orderedElement) => orderedElement.afterInitiated(this.container));
+    }
+    renderApp() {
+      let html = "";
+      for (const element of this.orderedElements) {
+        html += `
+${element.render()}
+`;
+      }
+      this.container.innerHTML = html;
+    }
+    attachEventListeners() {
+      const searchBox = this.container.querySelector(".search-box");
+    }
+  };
+
+  // web_interface/src/app.ts
   document.addEventListener("DOMContentLoaded", () => {
-    const data = JSON.parse(localStorage.getItem("HEATMAP_DATA"));
-    console.log(data);
-    new TreeExplorer("explorer", data);
+    const explorer = new FileExplorerBuilder().build();
+    const breadCrumb = new BreadCrumb();
+    const toolBar = new Toolbar(explorer);
+    const renderer = new Renderer(breadCrumb, toolBar, explorer);
   });
 })();
 
@@ -182,6 +10344,12 @@
     </head>
 
     <body>
-        <div id="explorer"></div>
+        <div id="app">
+            <header class="header">
+                <h1>File Explorer</h1>
+            </header>
+            <!--     reserved        -->
+            <div id="app_container"></div>
+        </div>
     </body>
 </html>

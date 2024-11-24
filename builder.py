@@ -12,6 +12,7 @@ def initiate():
     html_template  = src / 'index.html'
     web_components_template = web / 'web_components_template.py'
     web_components = web / 'web_components.py'
+    css = src / 'style.css'
 
     subprocess.run([
         'esbuild',
@@ -24,8 +25,11 @@ def initiate():
     with open(temp, 'r') as f:
         js_code = f.read()
 
+    with open(css, 'r') as f:
+        css_code = f.read()
+
     with open(html_template, 'r') as f:
-        html = f.read().replace('{{js_code}}', js_code)
+        html = f.read().replace('{{js_code}}', js_code).replace('{{css_code}}', css_code)
 
     with open(web_components_template, 'r') as f:
         web_component_content = f.read()
