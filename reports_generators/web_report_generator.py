@@ -21,12 +21,11 @@ class WebReportGenerator(ReportGenerator):
         root = root[0]
 
         js_data_template = """
-            console.log("Data script start");
             const data = %s;
             localStorage.setItem("HEATMAP_DATA",JSON.stringify(data));
-            console.log("Data saved to localStorage");
         """
         js_data = DisplayFileNodeWebViewTemplate(root).render()
+        js_data = js_data.replace("\"\"", "\"")
         js_data = js_data_template % (js_data,)
 
         html_data = WebComponents().get_html()

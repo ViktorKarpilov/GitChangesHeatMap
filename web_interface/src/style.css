@@ -1,56 +1,197 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background: #f5f5f5;
+:root {
+    --transition-duration: 0.3s;
+    --border-radius: 6px;
+    --spacing-unit: 8px;
+    --primary-color: #2196f3;
+    --hover-color: rgba(33, 150, 243, 0.1);
 }
 
-#explorer {
-    background: white;
-    border-radius: 4px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    margin: 0;
     padding: 20px;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 20px;
+}
+
+.file-explorer {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.toolbar {
+    display: flex;
+    gap: var(--spacing-unit);
+    margin-bottom: 20px;
+    padding: var(--spacing-unit);
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+}
+
+.search-box {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    font-size: 14px;
+}
+
+button {
+    padding: 8px 12px;
+    background: white;
+    border: 1px solid #ddd;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.sort-button:hover {
+    background: var(--hover-color);
 }
 
 .node {
-    padding: 8px;
     margin: 2px 0;
-    cursor: pointer;
-    border-radius: 3px;
-    transition: background-color 0.3s;
-}
-
-.node:hover {
-    filter: brightness(0.95);
+    border-radius: var(--border-radius);
 }
 
 .node-content {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: var(--spacing-unit);
+    padding: 8px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-duration);
 }
 
-.toggle {
-    width: 20px;
-    height: 20px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    font-size: 12px;
+.node-content:hover {
+    background: var(--hover-color);
+}
+
+.node.selected > .node-content {
+    background: var(--hover-color);
+    border: 1px solid var(--primary-color);
 }
 
 .children {
     margin-left: 24px;
-    display: none;
+    border-left: 2px solid #eee;
+    padding-left: var(--spacing-unit);
+    overflow: hidden;
+    transition: max-height var(--transition-duration) ease-in-out;
 }
 
-.children.open {
-    display: block;
+.collapsed > .children {
+    max-height: 0;
+}
+
+.expanded > .children {
+    max-height: 1000px;
+}
+
+.arrow {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform var(--transition-duration);
+}
+
+.collapsed > .node-content > .arrow {
+    transform: rotate(-90deg);
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
 }
 
 .count {
-    font-size: 0.8em;
-    color: #666;
     margin-left: auto;
+    font-size: 0.9em;
+    color: #666;
+    background: #f8f9fa;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.details-panel {
+    background: white;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.details-panel h2 {
+    margin-top: 0;
+    font-size: 1.2em;
+    color: #333;
+}
+
+.details-item {
+    margin: 12px 0;
+}
+
+.details-label {
+    font-weight: 500;
+    color: #666;
+    margin-bottom: 4px;
+}
+
+.details-value {
+    color: #333;
+}
+
+.path-breadcrumb {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: var(--border-radius);
+    margin-bottom: 12px;
+    overflow-x: auto;
+}
+
+.path-segment {
+    color: #666;
+    cursor: pointer;
+}
+
+.path-segment:hover {
+    color: var(--primary-color);
+}
+
+.path-separator {
+    color: #999;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.node-enter {
+    animation: fadeIn var(--transition-duration) ease-out;
+}
+
+.hidden {
+    display: none !important;
 }
